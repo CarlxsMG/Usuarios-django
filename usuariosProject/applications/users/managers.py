@@ -31,6 +31,16 @@ class UserManager(BaseUserManager, models.Manager):
 
         staff, superuser = True, True
         return self._create_user(username, email, password, staff, superuser, **extra_fields)
+
+    def create_user(self, username, email, password=None, **extra_fields):
+
+        staff, superuser = False, False
+        return self._create_user(username, email, password, staff, superuser, **extra_fields)
+
+    def create_user_staff(self, username, email, password=None, **extra_fields):
+        
+        staff, superuser = True, False
+        return self._create_user(username, email, password, staff, superuser, **extra_fields)
         
 
 
