@@ -1,6 +1,5 @@
 # DJango imports
 from django import forms
-from django.contrib.admin.sites import site
 
 # Local models
 from .models import User
@@ -43,3 +42,27 @@ class UserRegisterForm(forms.ModelForm):
     def clean_passwordRepeat(self):
         if self.cleaned_data['password'] != self.cleaned_data['passwordRepeat'] and len(self.cleaned_data['password']) > 5 :
             self.add_error('passwordRepeat', 'Las contraseñas son distintas o la longitud debe superar 5!')
+
+
+# Form without Model
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label='Username',
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Username',
+                'style': 'margin: 10px;',
+            }
+        )
+    )
+
+    password = forms.CharField(
+        label='Contraseña',
+        required=True,
+        widget=forms.PasswordInput(
+            attrs={
+                'placeholder': 'Contraseña',
+            }
+        )
+    )
