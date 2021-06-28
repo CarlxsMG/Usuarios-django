@@ -5,7 +5,7 @@
     <h1>Bienvenido al panel usuario</h1>
 
     <ul>
-        <li><a href="#">Cerrar sesion</a></li>
+        <li><a href="{% url 'users_app:user-logout' %}">Cerrar sesion</a></li>
         <li><a href="#">Actualizar datos</a></li>
     </ul>
 {% endblock content %}
