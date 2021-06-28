@@ -8,5 +8,6 @@ from . import views
 app_name = 'home_app'
 
 urlpatterns = [
-    path('panel/', views.HomePage.as_view(), name='panel')
+    path('panel/', views.HomePage.as_view(), name='panel'),
+    path('mixin/', views.TemplateMixin.as_view(), name='mixin'),
 ]
