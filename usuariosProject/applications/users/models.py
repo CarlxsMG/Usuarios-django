@@ -1,9 +1,9 @@
 # DJango imports
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 # Create your models here.
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     '''Model definition for User'''
 
     GENDER_CHOICES = (
@@ -17,6 +17,9 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=60)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+
+    # Key to login in admin panel
+    USERNAME_FIELD = 'username'
 
     def get_username(self):
         return self.username
