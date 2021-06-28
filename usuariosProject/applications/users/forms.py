@@ -1,5 +1,6 @@
 # DJango imports
 from django import forms
+from django.contrib.auth import authenticate
 
 # Local models
 from .models import User
@@ -49,7 +50,7 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         label='Username',
         required=True,
-        widget=forms.PasswordInput(
+        widget=forms.TextInput(
             attrs={
                 'placeholder': 'Username',
                 'style': 'margin: 10px;',
@@ -66,3 +67,15 @@ class LoginForm(forms.Form):
             }
         )
     )
+
+    def clean(self):
+
+        cleaned_data = super(LoginForm, self).clean()
+
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+
+        if not authenticate(username=username, password=password):
+            raise forms.ValidationError('Los datos de usuario no son correctos')
+
+        return self.cleaned_data

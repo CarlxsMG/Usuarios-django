@@ -2,7 +2,7 @@
 
 
 {% block content %}
-    <h1>Bienvenido al panel usuario</h1>
+    <h1>Bienvenido al panel usuario {{user}}</h1>
 
     <ul>
         <li><a href="{% url 'users_app:user-logout' %}">Cerrar sesion</a></li>
