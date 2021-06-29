@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Verificacion email</h1>
+    <h3>Ingrse el codigo</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Verificar</button>
+    </form>
+{% endblock content %}
+    

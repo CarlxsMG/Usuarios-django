@@ -20,7 +20,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=40, blank=True)
     last_name = models.CharField(max_length=60, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
-    cod_register = models.CharField(max_length=10, blank=True)
+    cod_register = models.CharField(max_length=10, default='000000')
 
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
