@@ -1,6 +1,6 @@
 # DJango imports
 from django.shortcuts import render
-from django.core.mail import message, send_mail
+from django.core.mail import EmailMessage
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -52,11 +52,12 @@ class UserRegisterView(FormView):
         )
 
         # Send email with code
-        title = 'Confirmacion email'
-        body = 'Codigo de verificacion: ' + codigo
-        email_sender = 'workercarlos85@gmail.com'
+        mail_subject = 'Confirmacion email'
+        message = '<h1>Codigo de verificacion: ' + codigo + '</h1>'
 
-        send_mail(title, body, email_sender, [form.cleaned_data['email'],])
+        mail = EmailMessage(mail_subject, message, to=[form.cleaned_data['email'],])
+        mail.content_subtype = 'HTML'
+        mail.send()
 
         # Redirect to view verification code
         return HttpResponseRedirect(
